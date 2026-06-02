@@ -3,7 +3,7 @@
 Bring **Grok Build's live X (Twitter) + web search** (and its coding agent) into the tools you already use. Two ways to consume it:
 
 - **An MCP tool (`grok_search`)**: works in **any MCP-capable agent**: Claude Code, OpenAI Codex, Cursor, and others. This is the cross-agent, real-time-search core.
-- **A Claude Code / Grok plugin**: convenience slash commands (`/grok:search`, `/grok:review`, `/grok:rescue`, …) plus a delegation subagent, with the MCP tool auto-wired in.
+- **A Claude Code / Grok plugin**: convenience slash commands (`/grok:search`, `/grok:review`, `/grok:rescue`, and more) plus a delegation subagent, with the MCP tool auto-wired in.
 
 Grok Build has native, real-time access to X and the web, strong for breaking news, social sentiment, current package/version facts, and anything where "what's true right now" matters, which a model's training cutoff can't provide. This project is a thin, auditable wrapper around your local `grok` CLI.
 
