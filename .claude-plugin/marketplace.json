@@ -1,0 +1,21 @@
+{
+  "name": "grok-build",
+  "owner": {
+    "name": "Grok Plugin Contributors"
+  },
+  "metadata": {
+    "description": "Use Grok Build from Claude Code for live X/web search, code review, and task delegation.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "grok",
+      "description": "Use Grok from Claude Code to search X/web in real time, review code, or delegate tasks.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Grok Plugin Contributors"
+      },
+      "source": "./plugins/grok"
+    }
+  ]
+}
