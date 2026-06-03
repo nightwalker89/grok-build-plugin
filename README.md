@@ -154,6 +154,18 @@ For Claude Code and Grok, the bundled plugin wires it up automatically. For any 
 
 Then the agent can call `grok_search(query)` on its own whenever it needs current information. It returns a synthesized answer plus a Sources list (including `x.com` links). The tool is read-only (Grok is restricted to `web_search`/`web_fetch`). It uses your local `grok` CLI, so you must have it installed and signed in.
 
+### Per-agent setup
+
+| Agent | How to add | Config location |
+| --- | --- | --- |
+| **OpenAI Codex** | `codex mcp add grok -- npx -y github:VasiHemanth/grok-mcp` | `~/.codex/config.toml` |
+| **Gemini CLI** | add the JSON block above under `mcpServers` | `~/.gemini/settings.json` |
+| **Antigravity (`agy`)** | add the JSON block above under `mcpServers` | `~/.gemini/config/mcp_config.json` (or workspace `.agents/mcp_config.json`) |
+| **Cursor** | add the JSON block above | `~/.cursor/mcp.json` |
+| **Claude Code / Grok** | install the plugin (auto-wired) | bundled `.mcp.json` |
+
+Tested live with the `npx github:` launch: **OpenAI Codex** (Codex called `grok_search` and returned a live, sourced answer), **Gemini CLI** (returned a sourced answer), and the standalone server handshake. Any other MCP client (Cursor, opencode, Copilot, Antigravity) uses the same JSON config.
+
 ### Why `npx github:...` instead of a file path
 
 MCP clients resolve plugin paths differently. Claude Code and Grok substitute `${CLAUDE_PLUGIN_ROOT}`, but **Codex does not**, so a `${CLAUDE_PLUGIN_ROOT}`-based manifest fails there. Launching from the repo with `npx -y github:VasiHemanth/grok-mcp` sidesteps all of it: npm hands every harness a correct absolute path, and the server resolves its own imports relative to itself (not the working directory). One manifest, every agent, one repo, no publish step.
