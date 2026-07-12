@@ -11,7 +11,7 @@ Thanks for your interest in improving grok-build-plugin! This is a community pro
 ## Development setup
 
 ```bash
-git clone https://github.com/VasiHemanth/grok-build-plugin.git
+git clone https://github.com/nightwalker89/grok-build-plugin.git
 cd grok-build-plugin
 npm test        # runs the unit + MCP smoke tests (no Grok account required)
 ```

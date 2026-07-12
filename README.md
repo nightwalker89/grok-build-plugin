@@ -51,7 +51,7 @@ Then just ask your agent to "search X for ..." and it will call `grok_search`. V
 Add the marketplace in Claude Code:
 
 ```bash
-/plugin marketplace add VasiHemanth/grok-build-plugin
+/plugin marketplace add nightwalker89/grok-build-plugin
 ```
 
 Install the plugin:
@@ -189,7 +189,7 @@ Tested live with the `npx` launch (both `github:` during development and the pub
 
 ### Why `npx grok-build-x-search-mcp` (preferred) or `npx github:...`
 
-MCP clients resolve plugin paths differently. Claude Code and Grok substitute `${CLAUDE_PLUGIN_ROOT}`, but **Codex does not**, so a `${CLAUDE_PLUGIN_ROOT}`-based manifest fails there. Using the published package (`npx -y grok-build-x-search-mcp`) or `npx -y github:VasiHemanth/grok-build-plugin` sidesteps all of it: npm hands every harness a correct absolute path, and the server resolves its own imports relative to itself (not the working directory). One manifest, every agent.
+MCP clients resolve plugin paths differently. Claude Code and Grok substitute `${CLAUDE_PLUGIN_ROOT}`, but **Codex does not**, so a `${CLAUDE_PLUGIN_ROOT}`-based manifest fails there. Using the published package (`npx -y grok-build-x-search-mcp`) or `npx -y github:nightwalker89/grok-build-plugin` sidesteps all of it: npm hands every harness a correct absolute path, and the server resolves its own imports relative to itself (not the working directory). One manifest, every agent.
 
 The published package on npm gives the fastest cold start (no git clone). The `github:` form still works as a fallback / for development and always points at the latest from the repo.
 
@@ -207,8 +207,8 @@ grok plugin validate ./plugins/grok
 grok plugin install ./plugins/grok --trust
 
 # Or from a published repo / marketplace
-grok plugin install VasiHemanth/grok-build-plugin#plugins/grok --trust
-grok plugin marketplace add VasiHemanth/grok-build-plugin
+grok plugin install nightwalker89/grok-build-plugin#plugins/grok --trust
+grok plugin marketplace add nightwalker89/grok-build-plugin
 
 grok plugin list          # confirm it's installed
 grok inspect              # see its skills/agents/commands (tagged `plugin: grok`)

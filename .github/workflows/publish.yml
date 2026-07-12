@@ -27,7 +27,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     # Only the real repo can publish (protects forks).
-    if: github.repository == 'VasiHemanth/grok-build-plugin'
+    if: github.repository == 'nightwalker89/grok-build-plugin'
 
     permissions:
       contents: read
