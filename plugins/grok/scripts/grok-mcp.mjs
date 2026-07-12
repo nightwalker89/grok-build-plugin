@@ -11,7 +11,7 @@
  * one implementation of "call grok" shared by the plugin and the MCP tool.
  */
 import process from "node:process";
-import { runGrokTurn } from "./lib/grok.mjs";
+import { runGrokTurn, WRITE_AND_SHELL_TOOLS } from "./lib/grok.mjs";
 import { buildSearchPrompt } from "./lib/prompts.mjs";
 
 const SERVER_INFO = { name: "grok", version: "0.1.3" };
@@ -98,7 +98,7 @@ async function handle(message) {
       try {
         const r = await runGrokTurn(process.cwd(), {
           prompt: buildSearchPrompt(query),
-          tools: ["web_search", "web_fetch"],
+          disallowedTools: WRITE_AND_SHELL_TOOLS,
           alwaysApprove: true,
           env: { [RECURSION_GUARD]: "1" }
         });

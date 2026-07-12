@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 import process from "node:process";
 
 import { parseArgs, normalizeEffort } from "./lib/args.mjs";
-import { getGrokAuthStatus, runGrokTurn, READ_ONLY_TOOLS } from "./lib/grok.mjs";
+import { getGrokAuthStatus, runGrokTurn, WRITE_AND_SHELL_TOOLS } from "./lib/grok.mjs";
 import { collectReviewDiff } from "./lib/git.mjs";
 import { buildReviewPrompt, buildSearchPrompt } from "./lib/prompts.mjs";
 import {
@@ -203,7 +203,9 @@ async function cmdReview(cwd, flags, rest) {
 
   const runOptions = {
     model: flags.model ?? null,
-    tools: READ_ONLY_TOOLS,
+    // Grok CLI rejects `--tools` allowlists that omit run_terminal_cmd
+    // (auto_background_on_timeout constraint), so deny write/shell tools instead.
+    disallowedTools: WRITE_AND_SHELL_TOOLS,
     alwaysApprove: true // read-only tools; never block on prompts
   };
 
@@ -231,7 +233,7 @@ async function cmdTask(cwd, flags, rest) {
     alwaysApprove: true
   };
   if (readOnly) {
-    runOptions.tools = READ_ONLY_TOOLS;
+    runOptions.disallowedTools = WRITE_AND_SHELL_TOOLS;
   } else {
     runOptions.disallowedTools = [];
   }
@@ -263,7 +265,7 @@ async function cmdSearch(cwd, flags, rest) {
   const prompt = buildSearchPrompt(rest);
   const runOptions = {
     model: flags.model ?? null,
-    tools: ["web_search", "web_fetch", "read_file", "grep", "list_dir"],
+    disallowedTools: WRITE_AND_SHELL_TOOLS,
     alwaysApprove: true
   };
 
