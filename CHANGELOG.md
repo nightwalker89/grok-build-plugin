@@ -6,6 +6,15 @@ All notable changes to this project are documented here. The format is based on
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-07-13
+
+### Fixed
+- **Search, review, and read-only task runs failed at session creation.** The Grok CLI rejects `--tools` allowlists that omit `run_terminal_cmd` (`auto_background_on_timeout requires enabled_background`). Read-only runs now pass `--disallowed-tools run_terminal_cmd,search_replace` instead — same read-only guarantee, working sessions. Affects both the companion CLI and the `grok_search` MCP server.
+
+### Changed
+- Repository URLs point to `nightwalker89/grok-build-plugin`.
+- Streamlined README; added AgentKit credit. Plugin and marketplace manifests now share the package version (0.1.4).
+
 ### Added
 - `grok_search` **MCP server** (`plugins/grok/scripts/grok-mcp.mjs`) exposing Grok's live X/web search to any MCP-capable agent (Claude Code, Codex, Cursor). Auto-wired for the plugin via `.mcp.json`.
 - npm `bin` + `files` so the server runs via `npx`. Initially via `github:`, then published to the registry as `grok-build-x-search-mcp` for v0.1.0.
